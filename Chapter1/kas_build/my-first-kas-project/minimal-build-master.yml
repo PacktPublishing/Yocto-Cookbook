@@ -7,12 +7,14 @@ repos:
   bitbake:
     url: "https://git.openembedded.org/bitbake"
     branch: master
+    path: layers/bitbake
     layers:
       .: disabled
 
   openembedded-core:
     url: "https://git.openembedded.org/openembedded-core"
     branch: master
+    path: layers/bitbake
     layers:
       meta:
 
