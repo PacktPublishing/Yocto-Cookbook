@@ -14,7 +14,7 @@ repos:
   openembedded-core:
     url: "https://git.openembedded.org/openembedded-core"
     branch: master
-    path: layers/bitbake
+    path: layers/openembedded-core
     layers:
       meta:
 
