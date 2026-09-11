@@ -1,0 +1,31 @@
+header:
+  version: 23
+
+distro: nodistro
+
+repos:
+  bitbake:
+    url: https://git.openembedded.org/bitbake
+    branch: master
+    layers:
+      .: disabled
+
+  openembedded-core:
+    url: https://git.openembedded.org/openembedded-core
+    branch: master
+    layers:
+      meta:
+
+local_conf_header:
+
+  performance: |
+    BB_NUMBER_THREADS = "24"
+    PARALLEL_MAKE = "-j24"
+
+  cache: |
+    DL_DIR = "${@os.environ['DL_DIR']}"
+    SSTATE_DIR = "${@os.environ['SSTATE_DIR']}"
+
+  testing: |
+    IMAGE_CLASSES += "testimage"
+    TEST_QEMUBOOT_TIMEOUT = "1500"

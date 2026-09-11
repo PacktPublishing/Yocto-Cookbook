@@ -1,0 +1,63 @@
+stages:
+  - build
+  - test
+
+variables:
+  BITBAKE_SETUP: "/home/gitlab-runner/bitbake/bin/bitbake-setup"
+
+  YOCTO_TOP_DIR: "/home/gitlab-runner/build"
+  DL_DIR: "/home/gitlab-runner/build/downloads"
+
+  TARGET_IMAGE: "core-image-minimal"
+
+default:
+  tags:
+    - yocto
+
+  before_script:
+    - test -x "${BITBAKE_SETUP}"
+    - mkdir -p "${YOCTO_TOP_DIR}"
+    - mkdir -p "${DL_DIR}"
+
+.build:
+  stage: build
+
+  script:
+    - ci/init-setup.sh
+    - ci/build.sh
+
+.test:
+  stage: test
+
+  script:
+    - ci/test.sh
+
+build:qemux86-64:
+  extends: .build
+
+  variables:
+    MACHINE: "qemux86-64"
+
+build:qemuarm64:
+  extends: .build
+
+  variables:
+    MACHINE: "qemuarm64"
+
+test:qemux86-64:
+  extends: .test
+
+  variables:
+    MACHINE: "qemux86-64"
+
+  needs:
+    - job: build:qemux86-64
+
+test:qemuarm64:
+  extends: .test
+
+  variables:
+    MACHINE: "qemuarm64"
+
+  needs:
+    - job: build:qemuarm64

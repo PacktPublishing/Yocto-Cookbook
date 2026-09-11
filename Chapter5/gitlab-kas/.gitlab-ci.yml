@@ -1,0 +1,61 @@
+stages:
+  - build
+  - test
+
+variables:
+  KAS_WORK_DIR: "/home/gitlab-runner/build/${CI_PROJECT_NAME}/${CI_PIPELINE_ID}"
+  DL_DIR: "/home/gitlab-runner/build/downloads"
+  SSTATE_DIR: "/home/gitlab-runner/build/sstate-cache"
+
+default:
+  tags:
+    - yocto
+
+  before_script:
+    - export PATH="${HOME}/.local/bin:${PATH}"
+    - kas --version
+    - mkdir -p "${KAS_WORK_DIR}"
+    - mkdir -p "${DL_DIR}"
+    - mkdir -p "${SSTATE_DIR}"
+
+.build:
+  stage: build
+
+  script:
+    - |
+      kas build \
+        --target core-image-minimal \
+        kas/${MACHINE}.yml
+
+.test:
+  stage: test
+
+  script:
+    - |
+      kas shell \
+        kas/${MACHINE}.yml \
+        -c "bitbake -c testimage core-image-minimal"
+
+qemux86-64-build:
+  extends: .build
+  variables:
+    MACHINE: qemux86-64
+
+qemuarm64-build:
+  extends: .build
+  variables:
+    MACHINE: qemuarm64
+
+qemux86-64-test:
+  extends: .test
+  variables:
+    MACHINE: qemux86-64
+  needs:
+    - qemux86-64-build
+
+qemuarm64-test:
+  extends: .test
+  variables:
+    MACHINE: qemuarm64
+  needs:
+    - qemuarm64-build

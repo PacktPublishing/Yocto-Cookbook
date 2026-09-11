@@ -1,0 +1,29 @@
+REPORT="tmp/deploy/images/qemux86-64/core-image-minimal-qemux86-64.rootfs.sbom-cve-check.yocto.json"
+
+jq '
+  .package[]
+  | . as $package
+  | .issue[]
+  | select(.status == "Unpatched")
+  | {
+      package: $package.name,
+      version: $package.version,
+      cve: .id,
+      status: .status,
+      detail: .detail
+    }
+' "${REPORT}"
+
+jq '
+  .package[]
+  | . as $package
+  | .issue[]
+  | select(.detail | tostring | contains("not-applicable-config"))
+  | {
+      package: $package.name,
+      version: $package.version,
+      cve: .id,
+      status: .status,
+      detail: .detail
+    }
+' "${REPORT}"
