@@ -8,6 +8,8 @@ SUMMARY = "Simple packaged Python application"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=029df0189ba1cb1abb1c7032e1ffaaf9"
 
+RECIPE_MAINTAINER:pn-hello-world-recipetool = "Marta Rybczynska <rybczynska@gmail.com>"
+
 SRC_URI = "git://github.com/mrybczyn/hello-world.git;protocol=https;branch=main"
 
 # Modify these as desired
