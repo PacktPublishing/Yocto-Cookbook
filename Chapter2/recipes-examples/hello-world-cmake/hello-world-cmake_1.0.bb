@@ -3,6 +3,8 @@ DESCRIPTION = "Demonstrates passing configuration from a Yocto Project recipe to
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
+RECIPE_MAINTAINER:pn-hello-world-cmake = "Marta Rybczynska <rybczynska@gmail.com>"
+
 SRC_URI = "file://hello.c \
            file://CMakeLists.txt"
 
