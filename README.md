@@ -91,7 +91,7 @@ Marta Rybczyńska
 </details>
 
 <details>
-  <summary><h2>Get to know Author</h2></summary>
+  <summary><h2>Get to know the author</h2></summary>
 
   *Marta Rybczyńska* is a network security specialist with 20 years of experience in open source and 15 years in embedded Linux development, working across the full embedded software stack. She is the founder of Ygreky, an open source security company focused on advancing the security of embedded systems, with core expertise in Linux kernel internals and building robust, regulation-ready platforms.
 
