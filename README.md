@@ -52,8 +52,7 @@ Marta Rybczyńska
 <details open>
   <summary><h2>Chapters</h2></summary>
 
-  <img src="https://cliply.co/wp-content/uploads/2020/02/372002150_DOCUMENTS_400px.gif" alt="Yocto Cookbook, First Edition" height="556px" align="right">
-
+  
   <ol>
     <li>Setting up the Yocto Project and bitbake</li>
     <li>Creating and modifying Yocto Project recipes</li>
